@@ -23,7 +23,7 @@ class Perceptron:
             if nErr == 0 or i > self.epochs:
                 break
         if i > self.epochs:
-            print "an error has occured"
+            #print "an error has occured"
             return self.w, i-1, k
 
 

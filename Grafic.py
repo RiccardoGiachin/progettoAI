@@ -1,15 +1,90 @@
-import Perceptron as pc
-import VotedPerceptron as vp
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as p
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
-from sklearn.metrics import classification_report
+import Perceptron as pc
+import VotedPerceptron as vpc
 
-def test():
-    print ("DOTA TEST")
+def PokerPlotPer():
+    y = []
+    X = []
+    Y = []
+    print(" POKER HAND ")
+    ph = p.read_csv('datasets/pokerhands.csv')
+    ph.columns = ['type1', 'card1', 'type2', 'card2', 'type3', 'card3',
+                  'type4', 'card4', 'type5', 'card5', 'typeofhand']
+    y = ph[['card1']]
+    Y = [1 if fy.card1 != 1 else -1 for fy in y.itertuples()]
+    X = (ph.iloc[:, 0:10])
 
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.25, random_state=0)
+    X_train = np.insert(np.array(X_train), 0, 1, axis=1)
+    X_test = np.insert(np.array(X_test), 0, 1, axis=1)
+
+    for i in range(0, 1500):
+        X_train[i]=X_train[i]
+        X_test[i] = X_test[i]
+        Y_train[i] = Y_train[i]
+        Y_test[i] = Y_test[i]
+    arrayPer = []
+    cont = []
+    arrayV=[]
+    for i in range(0, 50):
+        o_per = pc.Perceptron(0.25, i)
+        o_per.training(X_train, Y_train)
+        o_vper = vpc.VotedPerceptron(0.25, i)
+        o_vper.training(X_train, Y_train)
+        wei_Y_per = [o_per.guess(z) for z in X_test]
+        wei_Y_vper = [o_vper.guess(z) for z in X_test]
+        acc = 100 * accuracy_score(Y_test, wei_Y_per)
+        vacc = 100*accuracy_score(Y_test, wei_Y_vper)
+        print acc
+        print vacc
+        arrayPer.append(acc)
+        arrayV.append(vacc)
+        cont.append(i)
+    plt.plot(cont, arrayV, color='b')
+    plt.plot(cont, arrayPer, color='r')
+    plt.show()
+
+def AirQualityplot():
+    y = []
+    X = []
+    Y = []
+    print(" AIR QUALITY")
+    ph = p.read_csv('datasets/AirQualityUCI.csv')
+    ph.columns = ['date', 'time', 'CO(GT)', 'PT08', 'NMHC', 'C6H6', 'PT08.S2', 'NOx', 'PT08.S3', 'NO2', 'PT08.S4',
+                  'PT08.S5', 'T', 'RH', 'AH']
+    y = ph[['PT08']]
+    Y = [1 if fy.PT08 == 1313 else -1 for fy in y.itertuples()]
+    X = (ph.iloc[:, 0:14])
+
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.25, random_state=0)
+    X_train = np.insert(np.array(X_train), 0, 1, axis=1)
+    X_test = np.insert(np.array(X_test), 0, 1, axis=1)
+    arrayPer = []
+    cont = []
+    arrayV = []
+    for i in range(0, 50):
+        o_per = pc.Perceptron(0.25, i)
+        o_per.training(X_train, Y_train)
+        o_vper = vpc.VotedPerceptron(0.25, i)
+        o_vper.training(X_train, Y_train)
+        wei_Y_per = [o_per.guess(z) for z in X_test]
+        wei_Y_vper = [o_vper.guess(z) for z in X_test]
+        acc = 100 * accuracy_score(Y_test, wei_Y_per)
+        vacc = 100 * accuracy_score(Y_test, wei_Y_vper)
+        print acc
+        print vacc
+        arrayPer.append(acc)
+        arrayV.append(vacc)
+        cont.append(i)
+    plt.plot(cont, arrayV, color='b')
+    plt.plot(cont, arrayPer, color='r')
+    plt.show()
+
+def Dota2Plot():
     y = []
     X = []
     Y = []
@@ -408,6 +483,8 @@ def test():
 
         , 'Arc Warden', 'giack']
 
+    # print dtest.head()
+
     y = dt[['Tusk']]
     Y_train = [1 if y.Tusk == 1 else -1 for y in y.itertuples()]
 
@@ -415,59 +492,27 @@ def test():
     Y_test = [1 if y.Tusk == 1 else -1 for y in ytest.itertuples()]
     X = (dt.iloc[:, 0:116])
 
-    # X_train, X_test, Y_train, Y_test = train_test_split(X, Y,test_size=0.2 , random_state=0) we do not use this because we already have a dataset divided in test and train
-
     X_train = np.insert(np.array(dt), 0, 1, axis=1)
     X_test = np.insert(np.array(dtest), 0, 1, axis=1)
+    arrayPer = []
+    arrayV = []
+    cont =[]
+    for i in range(0, 50):
+        o_per = pc.Perceptron(0.25, i)
+        o_per.training(X_train, Y_train)
+        o_vper = vpc.VotedPerceptron(0.25, i)
+        o_vper.training(X_train, Y_train)
+        wei_Y_per = [o_per.guess(z) for z in X_test]
+        wei_Y_vper = [o_vper.guess(z) for z in X_test]
+        acc = 100 * accuracy_score(Y_test, wei_Y_per)
+        vacc = 100 * accuracy_score(Y_test, wei_Y_vper)
+        print acc
+        print vacc
+        arrayPer.append(acc)
+        arrayV.append(vacc)
+        cont.append(i)
+    plt.plot(cont, arrayV, color='b')
+    plt.plot(cont, arrayPer, color='r')
+    plt.show()
 
-    oPer = pc.Perceptron(0.25, 50)
-    oPer.training(X_train, Y_train)
 
-    predY = [oPer.guess(z) for z in X_test]
-
-    cm = confusion_matrix(Y_test, predY)
-    np.set_printoptions(precision=3)
-
-    print("accuracy of a layer: %.2f%%" % (100 * accuracy_score(Y_test, predY)))
-
-    print
-
-    print("confusion matrix, no normalization")
-    print cm
-    print
-    print
-
-    print ('normalized confusion matrix')
-    print cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-    print
-    print
-
-    print(classification_report(Y_test, predY))
-
-    print("VOTED PERCEPTRON")
-
-    o_vper = vp.VotedPerceptron(0.25, 50)
-
-    wei_voted, i_voted, length_array = o_vper.training(X_train, Y_train)
-
-    wei_Y_vper = [o_vper.guess(z) for z in X_test]
-
-    accu = 100 * accuracy_score(Y_test, wei_Y_vper)
-    print("accuracy of a layer voted: %.2f%%" % (accu))
-
-    cmv = confusion_matrix(Y_test, wei_Y_vper)
-    np.set_printoptions(precision=3)
-
-    print
-
-    print("confusion matrix voted not normalized")
-    print cmv
-    print
-    print
-
-    print("normalized confusion matrix")
-    print cmv.astype('float') / cmv.sum(axis=1)[:, np.newaxis]
-    print
-    print
-
-    print(classification_report(Y_test, wei_Y_vper))
