@@ -16,18 +16,23 @@ Datasets:
 ```questo file contiene i file presi da Uci Machine learning repositories```
 
 PokerHandTest.py:
+
 ```questo file contiene una funzione, chiamata test,  che studia il file pokerhandTest.csv stampa a schermo i risultati del training e del guess e le matrici di confusione, normalizzate e non, e la percentuale di accuratezza del nostro algoritmo```
 
 AirQuality.py:
+
 ```studiamo i valori del file AirQuality.csv e ne stampa a schermo i risulati del training e del guess oltre alle matrici di confusione e la percentuale di accuratezza```
 
-DotaTest.py
+DotaTest.py:
+
 ```studia i risultati degli algoritmi sul dataset Dota2Train.csv e Dota2Test.csv e notiamo che non si sfrutta la la funzionalità della repository di scikit-learn poiché si ha già una divisione tra Train e Test. ```
 
-Grafic.py
+Grafic.py:
+
 ```sono compresi tre metodi che permettono di sviluppare graficamente i risultati della percentuale di accuratezza e ne vediamo i risutlati in base al tempo con il quale vengono cambiati```
 
-AllTest.py
+AllTest.py:
+
 ```una classe che semplifica l'utilizzo delle funzioni delle varie classi permettendo di sfruttarle in un unica classe.```
 
 ## Come funziona
