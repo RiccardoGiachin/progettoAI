@@ -9,7 +9,7 @@ from sklearn.metrics import classification_report
 
 
 
-def testpoker():
+def test():
     y = []
     X = []
     Y = []

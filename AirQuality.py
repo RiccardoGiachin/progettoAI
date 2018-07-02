@@ -17,8 +17,8 @@ def test():
     ph = p.read_csv('datasets/AirQualityUCI.csv')
     ph.columns = ['date', 'time', 'CO(GT)', 'PT08', 'NMHC', 'C6H6', 'PT08.S2', 'NOx', 'PT08.S3', 'NO2', 'PT08.S4',
     			  'PT08.S5', 'T', 'RH', 'AH']
-    y = ph[['PT08']]
-    Y = [1 if fy.PT08 == 1313 else -1 for fy in y.itertuples()]
+    y = ph[['T']]
+    Y = [1 if fy.T == 0 else -1 for fy in y.itertuples()]
     X = (ph.iloc[:, 0:14])
 
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.25, random_state=0)
@@ -30,7 +30,7 @@ def test():
 
     o_per = pc.Perceptron(0.25, 200)
 
-    wei_standard, i_standard, k_standard = o_per.training(X_train, Y_train)
+    o_per.training(X_train, Y_train)
 
     # print "weight vector", wei_standard, "iteration done",  i_standard, k_standard
     wei_Y_per = [o_per.guess(z) for z in X_test]

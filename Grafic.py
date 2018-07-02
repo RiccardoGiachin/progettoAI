@@ -22,15 +22,10 @@ def PokerPlotPer():
     X_train = np.insert(np.array(X_train), 0, 1, axis=1)
     X_test = np.insert(np.array(X_test), 0, 1, axis=1)
 
-    for i in range(0, 1500):
-        X_train[i]=X_train[i]
-        X_test[i] = X_test[i]
-        Y_train[i] = Y_train[i]
-        Y_test[i] = Y_test[i]
     arrayPer = []
     cont = []
     arrayV=[]
-    for i in range(0, 50):
+    for i in range(0, 50, 5):
         o_per = pc.Perceptron(0.25, i)
         o_per.training(X_train, Y_train)
         o_vper = vpc.VotedPerceptron(0.25, i)
@@ -44,6 +39,9 @@ def PokerPlotPer():
         arrayPer.append(acc)
         arrayV.append(vacc)
         cont.append(i)
+    plt.title('Poker Test')
+    plt.ylabel('accuracy')
+    plt.xlabel('epochs')
     plt.plot(cont, arrayV, color='b')
     plt.plot(cont, arrayPer, color='r')
     plt.show()
@@ -56,8 +54,8 @@ def AirQualityplot():
     ph = p.read_csv('datasets/AirQualityUCI.csv')
     ph.columns = ['date', 'time', 'CO(GT)', 'PT08', 'NMHC', 'C6H6', 'PT08.S2', 'NOx', 'PT08.S3', 'NO2', 'PT08.S4',
                   'PT08.S5', 'T', 'RH', 'AH']
-    y = ph[['PT08']]
-    Y = [1 if fy.PT08 == 1313 else -1 for fy in y.itertuples()]
+    y = ph[['T']]
+    Y = [1 if fy.T == 0 else -1 for fy in y.itertuples()]
     X = (ph.iloc[:, 0:14])
 
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.25, random_state=0)
@@ -66,7 +64,7 @@ def AirQualityplot():
     arrayPer = []
     cont = []
     arrayV = []
-    for i in range(0, 50):
+    for i in range(0, 50,5):
         o_per = pc.Perceptron(0.25, i)
         o_per.training(X_train, Y_train)
         o_vper = vpc.VotedPerceptron(0.25, i)
@@ -80,6 +78,9 @@ def AirQualityplot():
         arrayPer.append(acc)
         arrayV.append(vacc)
         cont.append(i)
+    plt.title('Air Quality Test')
+    plt.ylabel('accuracy')
+    plt.xlabel('epochs')
     plt.plot(cont, arrayV, color='b')
     plt.plot(cont, arrayPer, color='r')
     plt.show()
@@ -497,7 +498,7 @@ def Dota2Plot():
     arrayPer = []
     arrayV = []
     cont =[]
-    for i in range(0, 50):
+    for i in range(0, 50,5):
         o_per = pc.Perceptron(0.25, i)
         o_per.training(X_train, Y_train)
         o_vper = vpc.VotedPerceptron(0.25, i)
@@ -511,6 +512,9 @@ def Dota2Plot():
         arrayPer.append(acc)
         arrayV.append(vacc)
         cont.append(i)
+    plt.title('Dota Test')
+    plt.ylabel('accuracy')
+    plt.xlabel('epochs')
     plt.plot(cont, arrayV, color='b')
     plt.plot(cont, arrayPer, color='r')
     plt.show()
