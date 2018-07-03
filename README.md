@@ -1,7 +1,7 @@
 # Voted Perceptron e Perceptron a confronto
 ## Composizione
 Il progetto è strutturato in modo tale che ogni test possa essere riprodotto in una singola classe chiamata AllTest.py.
-per poter usare correttamente il programma illustro prima di tutto le sue classi e come lavorano, in seguito iin ognuna di esse spiego come poterle usare.
+Per poter usare correttamente il programma illustro prima di tutto le sue classi e come lavorano, in seguito iin ognuna di esse spiego come poterle usare.
 
 Perceptron.py:
 
@@ -21,7 +21,7 @@ PokerHandTest.py:
 
 AirQuality.py:
 
-```studiamo i valori del file AirQuality.csv e ne stampa a schermo i risulati del training e del guess oltre alle matrici di confusione e la percentuale di accuratezza```
+```studia i valori del file AirQuality.csv e ne stampa a schermo i risulati del training e del guess oltre alle matrici di confusione e la percentuale di accuratezza```
 
 DotaTest.py:
 
@@ -29,15 +29,15 @@ DotaTest.py:
 
 Grafic.py:
 
-```sono compresi tre metodi che permettono di sviluppare graficamente i risultati della percentuale di accuratezza e ne vediamo i risutlati in base al tempo con il quale vengono cambiati```
+```sono compresi tre metodi che permettono di sviluppare graficamente i risultati della percentuale di accuratezza e ne vediamo i risulati in base al tempo con il quale vengono cambiati```
 
 AllTest.py:
 
-```una classe che semplifica l'utilizzo delle funzioni delle varie classi permettendo di sfruttarle in un unica classe.```
+```una classe che semplifica l'utilizzo delle funzioni dei vari algoritmi e test racchiusi in uno solo.```
 
 ## Come funziona
 
-Nella classe AllTest vengono specificati le classi che sono presenti nel progetto. A questo punto nei singoli file.py vengono passati i set di Train e Test ed inoltre vengono creati i file Y(che permette una classificazione binaria del problema). A questo punto, grazie all'utilizzo della funzione di Scikit-learn, train_test_split, possiamo dividere il nostro set in  Train e Test. Inoltre psosiamo decidere di quanto scegliere il nostro set di training e di test grazie al particolare attributo test_size=n del quale è composto la funzione citata prima.
+Nella classe AllTest vengono tutti i metodi che sono presenti nel progetto e nella quale vengono riprodotti insieme. A questo punto nei singoli file.py vengono passati i set di Train e Test ed inoltre vengono creati i file Y(che permette una classificazione binaria del problema). A questo punto, grazie all'utilizzo della funzione di Scikit-learn, train_test_split, possiamo dividere il nostro set in  Train e Test. Inoltre psosiamo decidere di quanto scegliere il nostro set di training e di test grazie al particolare attributo test_size=n del quale è composto la funzione citata prima.
 Da qui in poi viene creato prima l'oggetto perceptron e im seguito l'oggetto Voted Perceptron ed entrambi allenati un numero prestabilito di epochs, numero espresso nei costruttori dei nostri oggetti. Nello stesso programma possiamo vedere stampati a schermo i risultati del test di accuratezza, della matrice di confusione e del report di classificazione.
 
 ## Maneggiare il dataset
